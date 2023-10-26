@@ -155,3 +155,8 @@ while True:
         print(bat)
     elif name == '6':
         print(rabbit)
+    elif name == 'exit':
+        print("See you later")
+        break
+    else:
+        print("неправильная команда, попробуйте еще раз")
