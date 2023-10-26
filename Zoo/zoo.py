@@ -1,3 +1,4 @@
+"""Zoo: makes images of animals."""
 
 print("I love animals!")
 
@@ -7,9 +8,8 @@ print("The deer looks fine.")
 
 print("The lion looks healthy.")
 
-
-print("Please enter the number of the habitat you would like to view\n(camel = 1, lion = 2, deer = 3, goose = 4, bat = 5,  rabbit = 6):")
-
+print("Please enter the number of the habitat you would like to view\n"
+      "(camel = 1, lion = 2, deer = 3, goose = 4, bat = 5,  rabbit = 6):")
 
 camel = r"""
 The camel habitat...
@@ -155,3 +155,8 @@ while True:
         print(bat)
     elif name == '6':
         print(rabbit)
+    elif name == 'exit':
+        print("See you later")
+        break
+    else:
+        print("неправильная команда, попробуйте еще раз")
