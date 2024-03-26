@@ -1,13 +1,14 @@
 """A simplified Markdown editor"""
-import os
-import validators
+try:
+    import validators
+except ImportError:
+    print("The 'validators' library is required. Please install it using 'pip install validators'.")
 
 def print_help():
     print("Available formatters: plain bold italic link inline-code header line-break ordered-list unordered-list")
     print("Special commands: !help !done")
 
-
-def format_text(formatter, text):
+def format_text(formatter, text=""):
     if formatter == "plain":
         return text
     elif formatter == "bold":
@@ -15,7 +16,16 @@ def format_text(formatter, text):
     elif formatter == "italic":
         return f"*{text}*"
     elif formatter == "header":
-        return f"#{text}\n\n"
+        try:
+            level = int(input("Level (1-6): "))
+            if 1 <= level <= 6:
+                return f"{'#' * level} {text}\n\n"
+            else:
+                print("The level should be within the range of 1 to 6.")
+                return ""
+        except ValueError:
+            print("Invalid input. Level should be a number.")
+            return ""
     elif formatter == "link":
         label = input("Label: ")
         url = input("URL: ")
@@ -48,7 +58,6 @@ def format_text(formatter, text):
         print("Unknown formatting type or command")
         return ""
 
-
 def save_to_file(text):
     if text:
         try:
@@ -59,7 +68,6 @@ def save_to_file(text):
             print(f"An error occurred while saving the file: {e}")
     else:
         print("Nothing to save.")
-
 
 def markdown_formatter():
     formatted_text = ""
@@ -73,8 +81,7 @@ def markdown_formatter():
             break
         elif user_input in ["plain", "bold", "italic", "header", "link", "inline-code", "ordered-list", "unordered-list", "line-break"]:
             if user_input == "header" or user_input == "line-break":
-                text = input("Text: ")
-                formatted_text += format_text(user_input, text)
+                formatted_text += format_text(user_input, "")
             else:
                 text = input("Text: ")
                 formatted_text += format_text(user_input, text)
@@ -83,7 +90,7 @@ def markdown_formatter():
         else:
             print("Unknown formatting type or command")
 
-
 if __name__ == "__main__":
     markdown_formatter()
+
 
